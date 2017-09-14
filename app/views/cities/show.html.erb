@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+
+  <strong>name:</strong>
+  <%= @city.name %>
+</p>
+<% if @city.rooms.empty? %>
+<h2> no hotel found </h2>
+<% else %>
+<% @city.rooms.each do |room| %>
+<%= room.images_tag %>
+<% end %>
+<% end %>
+ <%= link_to  "edit", edit_city_path(@city.id) %>
+
+ <%= link_to "back", cities_path %>
+
+ <%= link_to "destroy", city_path(@city.id), method: :delete, data: {confirm: "Are you sure?"} %>

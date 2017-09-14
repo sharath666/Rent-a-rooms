@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2017-09-13
+  end_date: 2017-09-13
+  user_id: 1
+  room_id: 
+  default: 
+
+two:
+  start_date: 2017-09-13
+  end_date: 2017-09-13
+  user_id: 1
+  room_id: 
+  default: 

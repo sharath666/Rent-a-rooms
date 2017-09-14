@@ -1,0 +1,15 @@
+
+<% @rooms.each do |room| %>
+<% if room.is_authorized==false %>
+<%= room.name %>
+
+<%= form_for room do |t| %>
+<%= t.hidden_field :is_authorized, value:true %>
+<%= t.submit "authorize" %>
+<% end %>
+<%end %>
+<% end %>
+
+
+
+

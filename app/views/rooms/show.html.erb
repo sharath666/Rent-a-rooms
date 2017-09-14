@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+<%=image_tag (@room.images.url), :size => "260x180")%>
+</p>
+  <strong>name:</strong>
+  <%= @room.name %>
+</p>
+
+<p>
+  <strong>description:</strong>
+  <%= @room.description %>
+</p>
+
+<p>
+  <strong>price:</strong>
+  <%= @room.price %>
+</p>
+
+<p>
+  <strong>address</strong>
+  <%= @room.address %>
+</p>
+
+
+<p>
+  <strong>latitude</strong>
+  <%= @room.latitude %>
+</p>
+
+
+<p>
+  <strong>Longtitude</strong>
+  <%= @room.longitude %>
+</p>
+
+<p>
+<strong>Amenities</strong>
+<ol>
+<% @room.amenities.each do |amenity| %>
+<li><%= amenity.name %></li>
+<% end %>
+
+</ol>
+</p>

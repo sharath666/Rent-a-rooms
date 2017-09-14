@@ -3,6 +3,8 @@ class Room < ActiveRecord::Base
 	validates_presence_of :name, :description, :price, :rules,:address, :city_id
 	has_many :amenity_rooms
 	has_many :amenities, through: :amenity_rooms
+	has_many :bookings
+	
 
 	belongs_to :city
 	belongs_to :user

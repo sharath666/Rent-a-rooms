@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:username]
          belongs_to :role
          has_many :rooms
+         has_many
          before_create :assign_def_role
 
 

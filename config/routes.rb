@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  get '/rooms/myrooms'
   get '/rooms/unauthorize'
   devise_for :users
   resources :cities

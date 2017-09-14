@@ -44,6 +44,13 @@ def unauthorize
 @rooms = Room.all
 
 end
+
+def myrooms
+	@room = Room.find_by(params[:id])
+	if @room.user_id = current_user.id
+		@rooms = @room.user.rooms.all
+end
+end
 private
 def set_room
 	@room = Room.find(params[:id])

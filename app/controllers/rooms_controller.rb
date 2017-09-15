@@ -18,10 +18,10 @@ def create
 	else
 		render action: "new"
 	end
-
 end
-def show
 
+def show
+@booking = Booking.new
 end
 def edit
 end
@@ -41,15 +41,12 @@ end
 
 
 def unauthorize
-@rooms = Room.all
+@rooms = Room.where('is_authorized=?', false)
 
 end
 
 def myrooms
-	@room = Room.find_by(params[:id])
-	if @room.user_id = current_user.id
-		@rooms = @room.user.rooms.all
-end
+	@rooms = Room.where('user_id=?',current_user.id )
 end
 private
 def set_room

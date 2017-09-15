@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
-<%=image_tag (@room.images.url), :size => "260x180")%>
+<%=image_tag (@room.images.url)%>
 </p>
   <strong>name:</strong>
   <%= @room.name %>
@@ -44,5 +45,12 @@
 </ol>
 </p>
 
-<p>
-<strong>start date </strong>
+<%= form_for @booking do |f| %>
+
+<%= f.label "start_date" %>
+<%= f.date_select :start_date  %>
+<%= f.label "end_date" %>
+<%= f.date_select :end_date%>
+<%= f.hidden_field :room_id, value:@room.id %>
+<%= f.submit "book" %>
+<% end %>

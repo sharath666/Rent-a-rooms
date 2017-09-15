@@ -4,8 +4,10 @@ class Ability
   def initialize(user)
 
        if user.role? "admin"
-            can :manage, [City, Amenity]
+            can :manage, :all
         elsif user.role? "host" 
+            can [:index,:update, :is_confirmed], [Booking]
+            #is_confirmed is the newly created action so we are calling is_confirmed action
             can [:update, :destroy], Room do |room|
                 room.user_id =user.id
             end
@@ -13,6 +15,7 @@ class Ability
             can :read, [City, Amenity]
         else
             user.role? "guest"
+            can [:index,:create, :destroy], [Booking]
             can :create, [Room]
             can :read, [City]
         end

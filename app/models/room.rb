@@ -1,6 +1,10 @@
 class Room < ActiveRecord::Base
 	mount_uploader :images, AvatarUploader
 	validates_presence_of :name, :description, :price, :rules,:address, :city_id
+	 validates :description, length: { minimum: 150 }
+	 validates :name , uniqueness:true
+
+
 	has_many :amenity_rooms
 	has_many :amenities, through: :amenity_rooms
 	has_many :bookings

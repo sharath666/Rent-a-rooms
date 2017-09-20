@@ -7,6 +7,7 @@ class Ability
             can :manage, :all
         elsif user.role? "host" 
             can [:index,:update, :is_confirmed], [Booking]
+            can [:read, :myrooms ], [Room]
             #is_confirmed is the newly created action so we are calling is_confirmed action
             can [:update, :destroy], Room do |room|
                 room.user_id =user.id

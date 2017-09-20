@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
 	load_and_authorize_resource
-before_action :set_booking, only: [:show, :edit, :update, :destroy]
+before_action :set_booking, only: [:update, :destroy]
 def index
 	@booking= Booking.all
 end
@@ -18,9 +18,7 @@ def create
 end
 
 
-def show
 
-end
 def edit
 end
 def update

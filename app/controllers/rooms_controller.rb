@@ -1,7 +1,9 @@
 class RoomsController < ApplicationController
+load_and_authorize_resource
 before_action :set_room, only: [:show, :edit, :update, :destroy]
+
 def index
-	@rooms = Room.all
+	@rooms = Room.where('is_authorized=?', true)
 end
 def new
 	@room = Room.new

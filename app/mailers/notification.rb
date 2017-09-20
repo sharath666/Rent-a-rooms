@@ -15,6 +15,6 @@ class Notification < ApplicationMailer
 end
 def rooms_confirmation(booking)
   @booking = booking
-  mail to: "#{@booking.room.user.email}", subject: "a booking has been on yr #{@booking.user.room.name}"
+  mail to: "#{@booking.room.user.email}", subject: "a booking has been on yr #{@booking.room.name}"
 end
 end

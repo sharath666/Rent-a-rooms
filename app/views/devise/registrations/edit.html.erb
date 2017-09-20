@@ -21,6 +21,28 @@
     <% end %>
   </div>
 
+<div class="field">
+    <%= f.label :firstname %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :Lastname %><br />
+    <%= f.text_field :last_name, autofocus: true %>
+  </div>
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true %>
+  </div>
+
+<div class="field">
+    <%= f.label :Mobile %><br />
+    <%= f.text_field :mobile, autofocus: true %>
+  </div>
+
+
+
+
+
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>

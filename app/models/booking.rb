@@ -4,11 +4,12 @@ class Booking < ActiveRecord::Base
 	validates_presence_of :start_date, :end_date
 
 
-	validate :check_booking, :booking, on: :create
+	validate :check_booking
+	validate :booking, on: :create
 
 
 	def check_booking
-		if (self.start_date < Date.today) 
+		if (self.start_date < Date.today)  
 			self.errors.add(:base, "date has to be greater than today")
 		elsif (self.end_date < self.start_date) || (self.end_date == self.start_date)
 				self.errors.add(:base, "end_date has to be greater than start_date")
@@ -23,9 +24,9 @@ class Booking < ActiveRecord::Base
 		now_booking= (n1..n2).to_a
 		
 		all_booking= Booking.where("room_id=?", self.room_id)
-		all_booking.each do |data|
-			n3=data.start_date
-			n4=data.end_date
+		all_booking.each do |dataty|
+			n3=dataty.start_date
+			n4=dataty.end_date
 		
 			all_start_date_end_date = (n3..n4).to_a
 

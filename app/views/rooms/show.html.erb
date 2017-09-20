@@ -53,4 +53,5 @@
 <%= f.date_select :end_date%>
 <%= f.hidden_field :room_id, value:@room.id %>
 <%= f.submit "book" %>
+<%= link_to "edit", edit_room_path(@room.id) %>
 <% end %>

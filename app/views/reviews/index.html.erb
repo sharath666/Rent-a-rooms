@@ -1,0 +1,17 @@
+
+
+<% @reviews.each do |r| %>
+<label> Review </label>
+<%= r.review %>
+<label>food_rating</label>
+<%= r.food_rating %>
+<label> clean rating </label>
+<%= r.cleanliness_rating %>
+<label> Safety Rating</label>
+<%= r.safety_rating %>
+<label> Locality Rating </label>
+<%= r.locality_rating %>
+<%= r.user.username %>
+<label> Facility Rating </label>
+<%= r.facility_rating %>
+<% end %>

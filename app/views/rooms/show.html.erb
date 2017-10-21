@@ -45,13 +45,86 @@
 </ol>
 </p>
 
+<% if @room.user_id == current_user.id%>
+ <%= link_to "add special price",  new_room_special_price_path(@room.id) %>
+
+<% end %>
 <%= form_for @booking do |f| %>
 
 <%= f.label "start_date" %>
-<%= f.date_select :start_date  %>
+<%= f.text_field :start_date  %>
 <%= f.label "end_date" %>
-<%= f.date_select :end_date%>
+<%= f.text_field :end_date%>
 <%= f.hidden_field :room_id, value:@room.id %>
+<%= f.hidden_field  :price, value:@room.price %>
 <%= f.submit "book" %>
 <%= link_to "edit", edit_room_path(@room.id) %>
+
 <% end %>
+<% if Review.show_rating_form(@room.id, current_user.id) %>
+
+<%= form_for @review do |f| %>
+
+<%= f.label "review" %><br />
+<%= f.text_field :review  %><br />
+<%= f.label "food rating" %><br /><br />
+<%= f.collection_radio_buttons :food_rating, [[1],[2],[3],[4],[5]], :first, :last %>
+<%#= f.radio_button :food_rating, 2 %>
+<%#= f.radio_button :food_rating, 3%>
+<%#= f.radio_button :food_rating, 4 %>
+<%#= f.radio_button :food_rating, 5 %>
+<%= f.label "cleanliness_rating" %><br /><br />
+<%= f.radio_button :cleanliness_rating, 1 %>1
+<%= f.radio_button :cleanliness_rating, 2 %>2
+<%= f.radio_button :cleanliness_rating, 3 %>3
+<%= f.radio_button :cleanliness_rating, 4 %>4
+<%= f.radio_button :cleanliness_rating, 5 %>5
+<%= f.label "Safety_Rating" %><br /><br />
+<%= f.radio_button :safety_rating, 1 %>1
+<%= f.radio_button :safety_rating, 2 %>2
+<%= f.radio_button :safety_rating, 3 %>3
+<%= f.radio_button :safety_rating, 4 %>4
+<%= f.radio_button :safety_rating, 5 %>5
+
+<%= f.label "locality_rating" %><br /><br />
+<%= f.radio_button :locality_rating, 1%>1
+<%= f.radio_button :locality_rating, 2%>2
+<%= f.radio_button :locality_rating, 3%>3
+<%= f.radio_button :locality_rating, 4%>4
+<%= f.radio_button :locality_rating, 5%>5
+
+<%= f.hidden_field :room_id, value:@room.id %>
+
+<%= f.submit "add review" %>
+<% end %>
+<% end %>
+
+<script>
+// windowonload function()
+$(document).ready(function(){
+  $('#booking_start_date').datepicker({
+    dateFormat: 'yy-mm-dd',
+    numberOfMonths: 2, 
+    minDate: 0
+  });
+  $('#booking_start_date').on('change', function(){
+     setTimeOut(function(){
+       $('#booking_end_date').focus();
+     }, 0);
+    
+          var startDate = new Date($('#booking_start_date').val())
+        $('#booking_end_date').datepicker("destroy");
+
+    $('#booking_end_date').datepicker({
+    dateFormat: 'yy-mm-dd',
+    numberOfMonths: 2, 
+    minDate: startDate
+    });
+    
+  });
+});
+
+
+  
+
+</script>

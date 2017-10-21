@@ -8,8 +8,8 @@ def create
 	@booking= Booking.new(booking_params)
 	@booking.user_id = current_user.id
 	if @booking.save
-		 Notification.booking_confirmation(@booking).deliver!
-		 Notification.rooms_confirmation(@booking).deliver!
+		# Notification.booking_confirmation(@booking).deliver!
+		 #Notification.rooms_confirmation(@booking).deliver!
 		redirect_to bookings_path
 
 	else

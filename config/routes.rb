@@ -8,9 +8,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources :dashboard
   resources :cities
-  resources :rooms
+  resources :reviews
+
+resources :rooms do
+  resources :special_prices
+end
   resources :amenities
   resources :bookings
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

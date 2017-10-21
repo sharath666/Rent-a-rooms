@@ -8,6 +8,7 @@ class Ability
         elsif user.role? "host" 
             can [:index,:update, :is_confirmed], [Booking]
             can [:read, :myrooms ], [Room]
+          can :manage, SpecialPrice, :room => { :user_id => user.id }
             #is_confirmed is the newly created action so we are calling is_confirmed action
             can [:update, :destroy], Room do |room|
                 room.user_id =user.id
@@ -17,8 +18,10 @@ class Ability
         else
             user.role? "guest"
             can [:index,:create, :destroy], [Booking]
-            can :create, [Room]
+            can [:create,:read], [Room]
             can :read, [City]
+            can :read, [SpecialPrice]
+             
         end
     end
 

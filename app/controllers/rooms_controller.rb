@@ -24,6 +24,7 @@ end
 
 def show
 @booking = Booking.new
+@review = Review.new
 end
 def edit
 end
@@ -50,6 +51,7 @@ end
 def myrooms
 	@rooms = Room.where('user_id=?',current_user.id )
 end
+
 private
 def set_room
 	@room = Room.find(params[:id])

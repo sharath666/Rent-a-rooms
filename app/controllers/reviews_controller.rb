@@ -1,13 +1,12 @@
 class ReviewsController < ApplicationController
-	before_create :
+	before_action :authenticate_user!
 	def create
 		@review = Review.new(review_params)
 		@review.user_id = current_user.id
-
+		
 		if  @review.save
 			redirect_to rooms_path, notice: "Review is successfully added"
-		else
-			render action: "new"
+	
 		end
 	end
 
@@ -24,8 +23,17 @@ class ReviewsController < ApplicationController
 # end
 # end
 
+
+def destroy 
+@review = Review.find(params[:id])
+@review.destroy
+redirect_to room_path(@room.id)
+
+end
+
 private
 	 def review_params
-	 	params[:room].permit(:review, :food_rating, :cleanliness_rating, :safety_rating, :locality_rating, :room_id, :user_id, :facilty_rating)
+	 	params[:review].permit(:review, :food_rating, :cleanliness_rating, :safety_rating, :locality_rating, :room_id, :user_id, :facility_rating)
+end
 end
 		

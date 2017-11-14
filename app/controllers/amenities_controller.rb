@@ -1,4 +1,6 @@
 class AmenitiesController < ApplicationController
+	before_action :authenticate_user!
+
 before_action :set_amenity, only: [:show, :edit, :update, :destroy]
 def index 
 	@amenities = Amenity.all

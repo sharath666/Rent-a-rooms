@@ -1,0 +1,32 @@
+<h2> All users </h2>
+<table border=1>
+<thead>
+<tr>
+<th>Name</th>
+<th>Role</th>
+<th>rooms</th>
+<th>bookings</th>
+
+</tr>
+</thead>
+
+
+<tbody>
+
+<% @users.each do |user| %>
+
+
+<tr>
+
+
+<td><%= user.username%></td>
+<td><%=user.role.name %></td>
+<td><% user.rooms.each do |room| %>
+<%= room.name %>
+	<% end %>
+</td>
+<td><%= user.bookings.length %></td> 
+</tr>
+<% end %>
+</tbody>
+</table>

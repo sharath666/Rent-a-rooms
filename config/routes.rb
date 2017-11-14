@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-
+  get '/rooms/allbookings'
+  get 'rooms/check_booking'
+  get 'dashboard/user'
   get 'dashboard/index'
   get '/bookings/is_confirmed'
   get '/rooms/myrooms'
@@ -20,7 +22,7 @@ end
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'cities#index'
+   root 'rooms#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,15 +1,21 @@
+
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
+  <div id="errorMsg"></div>
+
+
 
   <div class="field">
     <%= f.label :firstname %><br />
     <%= f.text_field :first_name, autofocus: true %>
+    <span id="firstnameError"></span>
   </div>
   <div class="field">
     <%= f.label :Lastname %><br />
     <%= f.text_field :last_name, autofocus: true %>
+    <span id="lastnameError"></span>
   </div>
   <div class="field">
     <%= f.label :username %><br />
@@ -19,6 +25,7 @@
 <div class="field">
     <%= f.label :Mobile %><br />
     <%= f.text_field :mobile, autofocus: true %>
+    <span id="mobileError"></span>
   </div>
 <div class="field">
     <%= f.label :email %><br />

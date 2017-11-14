@@ -1,5 +1,5 @@
 class Room < ActiveRecord::Base
-	mount_uploader :images, AvatarUploader
+	mount_uploader :images, ImagesUploader
 	validates_presence_of :name, :description, :price, :rules,:address, :city_id
 	 validates :description, length: { minimum: 150 }
 	 validates :name , uniqueness:true

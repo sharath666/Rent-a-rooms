@@ -1,0 +1,6 @@
+<% if @room.errors.any? %>
+$('#errorMsg').html("<%= escape_javascript render 'errors' %>");
+<% else %>
+$('#roomList').append("<%= escape_javascript render 'rooms' %>");
+$('#new_room')[0].reset();
+<% end %>

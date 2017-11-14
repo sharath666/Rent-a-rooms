@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+	before_action :authenticate_user!, except: [:index, :show]
+
 load_and_authorize_resource
 before_action :set_room, only: [:show, :edit, :update, :destroy]
 
@@ -15,16 +17,24 @@ def create
 	@room.user_id = current_user.id
 	#@room.latitude = 12.00	
 	#@room.longitude = 13.00
-	if @room.save
-		redirect_to rooms_path
-	else
-		render action: "new"
-	end
+	respond_to do |format|
+		if @room.save
+		format.html { redirect_to rooms_path, notice: 'Comment was successfully created.' }
+        format.json { render :show, status: :created, location: @room }
+		format.js
+		
+		else
+		format.html { render :new }
+        format.json { render json: @room.errors, status: :unprocessable_entity }
+		format.js
+end
+end
 end
 
 def show
 @booking = Booking.new
 @review = Review.new
+@reviews = Review.all
 end
 def edit
 end
@@ -40,6 +50,9 @@ Notification.authorize_confirmation(@room).deliver!
 end
 end
 def destroy
+	@room.destroy
+	redirect_to rooms_path, notice: "successfully deleted the rooms"
+
 end
 
 
@@ -52,6 +65,15 @@ def myrooms
 	@rooms = Room.where('user_id=?',current_user.id )
 end
 
+def allbookings
+	@mybookings = Room.where('user_id=?', current_user.id)
+
+end
+
+
+def check_booking
+@room = Booking.where('start_date > ?',  Date.today)
+end
 private
 def set_room
 	@room = Room.find(params[:id])
@@ -61,3 +83,4 @@ def room_params
 
 end
 end
+

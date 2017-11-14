@@ -1,0 +1,10 @@
+<% if @room.empty? %>
+<h2> no records found </h2>
+<% else %>
+
+<h2>Pending booking</h2>
+
+<% @room.each do |room| %>
+	<%= room.start_date %>
+	<% end %>
+	<% end %>

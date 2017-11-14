@@ -1,8 +1,31 @@
-<h2> Listing cities </h2>
 
-<% @cities.each do |city| %>
-<%=link_to " #{city.name} #{city.rooms.length}", city_path(city.id)  %>  
-<% end %>
+
+
+<div class="row">
+<div class="col-md-8">
+<div class="page-header">
+<h2> Listing Cities</h2>
+</div>
+<ul class="list-group" id="cityList" >
+<% City.all.each do |city| %>
+  <li class="list-group-item">
+
+    <span class="badge"><%=city.rooms.length %></span>
+    <%= link_to city.name, city %>
+  </li>
+
+  <% end %>
+</ul>
+</div>
+<div class="col-md-4">
+<div class="page-header">
+<h2>Add a city</h2>
+</div>
+<div id="errorMsg"></div>
 <% if can? :create, City.new %>
-<%= link_to "add city", new_city_path %>
+<%= render 'form' %>
 <% end %>
+</div>
+</div>
+
+</div>

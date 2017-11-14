@@ -1,0 +1,8 @@
+<% if @city.errors.any? %>
+$('#errorMsg').html("<%= escape_javascript render 'errors' %>");
+<% else %>
+$('#errorMsg').hide();
+$('#cityList').append("<%= escape_javascript render 'citys' %>");
+$('#new_room')[0].reset();
+
+<% end %>

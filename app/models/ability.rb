@@ -2,26 +2,32 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    if user.nil?
+        can [:read], [Room]
 
-       if user.role? "admin"
+       elsif user.role? "admin"
             can :manage, :all
         elsif user.role? "host" 
             can [:index,:update, :is_confirmed], [Booking]
             can [:read, :myrooms ], [Room]
+            can [:read, :allbookings], [Room]
+            can [:create,:read], [Room]
           can :manage, SpecialPrice, :room => { :user_id => user.id }
             #is_confirmed is the newly created action so we are calling is_confirmed action
             can [:update, :destroy], Room do |room|
                 room.user_id =user.id
+                can [:destroy], [Review]
             end
 
             can :read, [City, Amenity]
-        else
+        elsif
             user.role? "guest"
             can [:index,:create, :destroy], [Booking]
             can [:create,:read], [Room]
             can :read, [City]
             can :read, [SpecialPrice]
              
+
         end
     end
 

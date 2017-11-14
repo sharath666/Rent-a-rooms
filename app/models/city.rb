@@ -1,4 +1,5 @@
 class City < ActiveRecord::Base
-	validates :name, presence:true, uniqueness:true
+	validates_presence_of :name
+	validates_uniqueness_of :name
 	has_many :rooms
 end

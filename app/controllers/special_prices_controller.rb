@@ -1,4 +1,5 @@
 class SpecialPricesController < ApplicationController
+	before_action :authenticate_user!
 load_and_authorize_resource :room
   load_and_authorize_resource :special_price, :through => :room
 

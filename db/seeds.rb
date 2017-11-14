@@ -12,5 +12,5 @@ Role.create(name: "guest")
   u.username = "admin"
  u.email = "admin@gmail.com"
  u.password = "secret123"
- u.role_id = Role.first.id
+ u.role_id = Role.find_by_name("admin").id
 u.save

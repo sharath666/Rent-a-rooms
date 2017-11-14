@@ -1,0 +1,17 @@
+
+<% if @city.errors.any? %>
+<h3>these are the errors</h3>
+<ul>
+<% @city.errors.full_messages.each do |msg| %>
+
+<li><%=msg %></li>
+<% end %>
+</ul>
+<% end %>
+
+<%= form_for(@city, remote:true) do |f| %>
+<%= f.label :CityName %>
+<%= f.text_field :name %>
+
+<%= f.submit %>
+<% end %>

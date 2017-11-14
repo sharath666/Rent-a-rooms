@@ -2,39 +2,39 @@
 <html>
 <head>
   <title>RentARoom</title>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script src="../chosen.jquery.js" /></script>
   <link href="../chosen.css"  rel="stylesheet"/>
+  
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <%= csrf_meta_tags %>
 
 </head>
 <body>
- <% if user_signed_in? %>
-  <%= current_user.username %>
-  <%= link_to "Account Settings", edit_user_registration_path %> | 
-  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-  <%= link_to "cities", cities_path %>|
-  <%= link_to "rooms", rooms_path %>
-  <% if current_user.role?("admin")%>
-  <%= link_to "unauthorised_rooms", rooms_unauthorize_path %>
-  <% end %>
-  <% if current_user.role?("host")%>
-  <%= link_to "myrooms", rooms_myrooms_path %>
-  <% end %>
-  
-  
-   <% else %>
-  <%= link_to "Login", new_user_session_path %> | <%= link_to "Register", new_user_registration_path %> 
-
-<% end %>
+ <div class="container">
+<%= render './layouts/nav' %>
 <%= yield %>
 <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
 
-      
+
+
+
+
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <!-- /.container-fluid -->
+
+
+  </div>
 </body>
 </html>

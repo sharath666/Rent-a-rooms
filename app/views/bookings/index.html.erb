@@ -1,6 +1,14 @@
 <h2> booking </h2>
 
 <% @booking.each do |b| %>
-<%= b.start_date %>
-<% b.end_date %>
+<% if b.user_id == current_user.id %>
+
+<label>Start Date</label>
+
+<%= b.start_date %><br /><br />
+<label> End Date</label>
+<%= b.end_date %><br /><br />
+<label>Booking Price</label>
+<%= b.price %><br /><br />
+<% end %>
 <% end %>

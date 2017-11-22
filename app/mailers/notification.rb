@@ -7,7 +7,7 @@ class Notification < ApplicationMailer
   #
   def authorize_confirmation(room)
       @room = room
-    mail to: "#{@room.user.email}", subject: "Order confirmed - #{@room.user.username}"
+    mail to: "#{@room.user.email}", subject: "room is authorized confirmed - #{@room.user.username}"
   end
   def booking_confirmation(booking)
   	@booking = booking

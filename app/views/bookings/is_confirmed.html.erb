@@ -2,11 +2,11 @@
 
 
 <% @booking.each do |book| %>
-<% if book.room.user_id == current_user.id  %>
+
 
 	<%= book.start_date %>
 	<%= book.end_date %>
-	<%= book.room.name %>
+	<%=book.room.name %>
 
 	<%= form_for book do |t|%>
 	<%= t.hidden_field :is_confirmed, value:true %>
@@ -14,4 +14,3 @@
 
 <% end %>
 <% end %>
-<% end %>	

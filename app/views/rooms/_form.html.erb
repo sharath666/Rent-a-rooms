@@ -1,36 +1,50 @@
+<div class="row">
+<div class="col-md-6">
+	<% if @room.errors.any? %>
+		<h3> These errors prohibited the form from being saved : </h3>
+		<ul>
+		<% @room.errors.full_messages.each do |msg| %>
+		<li><%= msg %></li>
+		<% end %>
+	</ul>
+		<% end %>
 
-<% if @room.errors.any? %>
-	<h3> These errors prohibited the form from being saved : </h3>
-	<ul>
-	<% @room.errors.full_messages.each do |msg| %>
-	<li><%= msg %></li>
+		
+		<%= form_for @room do |f| %>
+
+	<div class="form-group">
+	<label>name </label>
+	<%= f.text_field :name, class: "form-control" %><br /><br />
+	</div>
+	<div class="form-group">
+	<label>description</label>
+	<%=f.text_area :description, class: "form-control" %><br /><br />
+	</div>
+	<div class="form-group">
+	<label>price</label>
+	<%= f.text_field :price, class:"form-control" %><br /><br />
+	</div>
+	<div class="form-group">
+	<label>rules</label>
+	<%= f.text_area :rules, class:"form-control"%><br /><br />
+	</div>
+	<label>address</label>
+	<%= f.text_area :address, class: "form-control" %><br /><br />
+	<label> City name </label>
+	<%= f.collection_select :city_id, City.all, :id, :name, prompt: "Select City" %><br /><br />
+
+	<label>Amenities</label>
+	<%= f.collection_check_boxes :amenity_ids, Amenity.all, :id, :name %><br /><br />
+	<label>images</label>
+	<%=f.file_field :images %><br /><br />
+		
+	<%= f.submit "submit", class: "btn btn-primary" %>
+
 	<% end %>
-</ul>
-	<% end %>
-
-	
-	<%= form_for @room do |f| %>
-
-
-<label>name</label>
-<%= f.text_field :name %><br /><br />
-<label>description</label>
-<%=f.text_area :description %><br /><br />
-<label>price</label>
-<%= f.text_field :price %><br /><br />
-<label>rules</label>
-<%= f.text_area :rules%><br /><br />
-<label>address</label>
-<%= f.text_area :address %><br /><br />
-<label> City name </label>
-<%= f.collection_select :city_id, City.all, :id, :name, prompt: "Select City" %>
-
-<%= f.collection_check_boxes :amenity_ids, Amenity.all, :id, :name %>
-<label>images</label>
-<%=f.file_field :images %>
-<%= f.submit %>
-
-<% end %>
+	</div>
+<div class="col-md-6">
+</div>
+</div>
 
    <script>
 	$(document).ready(function(){

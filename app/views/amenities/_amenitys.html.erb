@@ -1,0 +1,12 @@
+<li><%= @amenity.name %></li>
+	<p><%= @amenity.description.truncate(30) %></p>
+	<%=link_to amenity_path(@amenity.id), class:"btn btn-info pull-right"  do%>
+	<i class="glyphicon glyphicon-share-alt"></i> Read More
+	<% end %>
+	<hr>
+	<li><%= amenity.name %></li>
+	<p><%= amenity.description.truncate(30) %></p>
+	<%=link_to amenity, class:"btn btn-info pull-right"  do%>
+	<i class="glyphicon glyphicon-share-alt"></i> Read More
+	<% end %>
+	<hr>

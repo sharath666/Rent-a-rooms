@@ -18,13 +18,13 @@
 </ul>
 </div>
 <div class="col-md-4">
+<% if can? :create, City.new %>
 <div class="page-header">
 <h2>Add a city</h2>
 </div>
-<div id="errorMsg"></div>
-<% if can? :create, City.new %>
 <%= render 'form' %>
 <% end %>
+<div id="errorMsg"></div>
 </div>
 </div>
 

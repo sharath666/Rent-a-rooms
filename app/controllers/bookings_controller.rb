@@ -8,9 +8,10 @@ def index
 end
 def create
 	@booking= Booking.new(booking_params)
+	binding.pry
 	@booking.user_id = current_user.id
 	if @booking.save
-		# Notification.booking_confirmation(@booking).deliver!
+		Notification.booking_confirmation(@booking).deliver!
 		 #Notification.rooms_confirmation(@booking).deliver!
 		redirect_to bookings_path
 
@@ -33,8 +34,9 @@ end
 
 
 def is_confirmed
-	
+		if current_user.role?("host")
 		@booking= Booking.where('is_confirmed = ?', false)
+	end
 end
 
 private

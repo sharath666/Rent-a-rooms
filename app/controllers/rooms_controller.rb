@@ -39,15 +39,15 @@ end
 def edit
 end
 def update
-	if @room.update_attributes(room_params)
-	redirect_to room_path(@room.id), notice: "successfully updated the room"
-else
-	render action: "new"
+			if @room.update_attributes(room_params)
+			redirect_to room_path(@room.id), notice: "successfully updated the room"
+		else
+			render action: "new"
 
-end
-if @room.is_authorized == true
-Notification.authorize_confirmation(@room).deliver!
-end
+		end
+		if @room.is_authorized == true
+		Notification.authorize_confirmation(@room).deliver!
+		end
 end
 def destroy
 	@room.destroy

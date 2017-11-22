@@ -1,0 +1,9 @@
+<div class="alert alert-danger">
+      <h4><%= pluralize(@amenity.errors.count, "error") %> prohibited this comment from being saved:</h4>
+
+      <ul>
+      <% @amenity.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div

@@ -9,9 +9,9 @@
 </ul>
 <% end %>
 
-<%= form_for(@city, remote:true) do |f| %>
+<%= form_for(@city, remote:true) do |f| %> 
 <%= f.label :CityName %>
-<%= f.text_field :name %>
 
-<%= f.submit %>
+<%= f.text_field :name %>
+<%=  f.submit "Add city", class: "btn btn-secondary" %>
 <% end %>

@@ -9,11 +9,11 @@ class Booking < ActiveRecord::Base
 	#validate :check_booking
 	validate :booking, on: :create
 
-before_save :check_offer
+validate :check_offer, on: :create
 
 
 	def check_booking
-		binding.pry
+		#binding.pry
 		if (self.start_date < Date.today)  
 			self.errors.add(:base, "date has to be greater than today")
 		elsif (self.end_date < self.start_date) || (self.end_date == self.start_date)
@@ -79,5 +79,6 @@ before_save :check_offer
 
 	
 		self.price = total_price
+		binding.pry
 		end
 end

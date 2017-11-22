@@ -1,55 +1,175 @@
 
-<h2>Sign up</h2>
+<div class="row">
+  <div class="col-md-6">
+    <div class="page-header">
+      <h2>Sign up</h2>
+    </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-  <div id="errorMsg"></div>
+      <!-- <div class="alert alert-danger"> -->
+        <div class="error_explanation">
+          <%= devise_error_messages! %>
+        </div>
+    <!-- </div> -->
+        <div class="form-group">
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, autofocus: true, placeholder: "Enter the first name", class: "form-control" %>
+          <span id="firstNameError" style="color: red"></span>           
+        </div>
 
+        <div class="form-group">
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, placeholder: "Enter the last name", class: "form-control"  %>
+          <span id="lastNameError" style="color: red"></span>
+        </div>
+        <div class="form-group">
+          <%= f.label :username %>
+          <%= f.text_field :username, placeholder: "Enter the username", class: "form-control"  %>
+          <span id="usernameError" style="color: red"></span>
+        </div>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, placeholder: "Enter the email-id", class: "form-control"  %>
+          <span id="emailError" style="color: red"></span>
+        </div>
 
+        <div class="form-group">
+          <%= f.label :mobile_number %>
+          <%= f.text_field :mobile, placeholder: "Enter the mobile number", class: "form-control"  %>
+          <span id="mobileNumberError" style="color: red"></span>
+        </div>
 
-  <div class="field">
-    <%= f.label :firstname %><br />
-    <%= f.text_field :first_name, autofocus: true %>
-    <span id="firstnameError"></span>
+        <div class="form-group">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+          <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+          <span id="passwordError" style="color: red"></span>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+          <span id="passwordConfirmationError" style="color: red"></span>
+        </div>
+
+        <div class="actions" id="submit">
+          <br><%= f.submit "Sign up", class: "btn btn-success" %>
+        </div>
+      <% end %>
   </div>
-  <div class="field">
-    <%= f.label :Lastname %><br />
-    <%= f.text_field :last_name, autofocus: true %>
-    <span id="lastnameError"></span>
-  </div>
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true %>
-  </div>
-
-<div class="field">
-    <%= f.label :Mobile %><br />
-    <%= f.text_field :mobile, autofocus: true %>
-    <span id="mobileError"></span>
-  </div>
-<div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
+</div>
 
 
+<%= render "devise/shared/links" %><br><br>
+<script>
+  var validator={
+    first_name:false,
+    last_name:false,
+    username:false,
+    mobile_number:false,
+    email:false,
+    password:false,
+    password_confirmation:false
+  }
+  var emailFormatter = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+  var passwordFormatter = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+  var alphabetFormatter = /^[A-Za-z]+$/;
+  var mobileFormatter = /^[0-9]+$/;
+  var usernameHandle = document.getElementById('user_username');
+  var emailHandle = document.getElementById('user_email');
+  var passwordHandle = document.getElementById('user_password');
+  var passwordConfirmationHandle = document.getElementById('user_password_confirmation');
+  var usernameErrorHandle = document.getElementById('usernameError');
+  var emailErrorHandle = document.getElementById('emailError');
+  var passwordErrorHandle = document.getElementById('passwordError');
+  var passwordConfirmationErrorHandle = document.getElementById('passwordConfirmationError');
+  var firstNameErrorHandle = document.getElementById('firstNameError');
+  var lastNameErrorHandle = document.getElementById('lastNameError');
+  var mobileErrorHandle = document.getElementById('mobileNumberError');
+  var submitHandle = document.getElementById('submit');
+  submitHandle.addEventListener('click', function(e){
+     if(emailHandle.value == ""){
+        emailErrorHandle.innerHTML = "email can't be blank";
+        validator.email = false;
+      } else if(!emailFormatter.test(emailHandle.value)){
+        emailErrorHandle.innerHTML = "Should be a valid format";
+        validator.email = false;
+      } else{
+        emailErrorHandle.innerHTML = "";
+        validator.email = true;
+      }
+      if($('#user_first_name').val() == ""){
+        firstNameErrorHandle.innerHTML = "first name can't be blank";
+        validator.first_name = false;
+      } else{
+        firstNameErrorHandle.innerHTML = ""
+        validator.first_name = true;
+      }
+      if($('#user_last_name').val() == ""){
+        lastNameErrorHandle.innerHTML = "last name can't be blank";
+        validator.first_name = false;
+      } else{
+        lastNameErrorHandle.innerHTML = ""
+        validator.first_name = true;
+      }
+      if($('#user_mobile_number').val() == ""){
+        mobileErrorHandle.innerHTML = "number can't be blank";
+        validator.mobile_number = false;
+      } else if(!mobileFormatter.test($('#user_mobile_number').val())){
+        mobileErrorHandle.innerHTML = "it is not a number";
+        validator.mobile_number = false;
+      } else if($('#user_mobile_number').val().length < 10){
+        mobileErrorHandle.innerHTML = "number should be atleast 10 digits";
+        validator.mobile_number = false;
+      } else{
+        mobileErrorHandle.innerHTML = ""
+        validator.mobile_number = true;
+      }
+      if(usernameHandle.value == ""){
+        usernameErrorHandle.innerHTML = "user name can't be blank";
+        validator.username = false;
+      } else if(!alphabetFormatter.test(usernameHandle.value)){
+        usernameErrorHandle.innerHTML = "Should only be alphabet";
+        validator.username = false;
+      } else if (usernameHandle.value.length < 3){
+        usernameErrorHandle.innerHTML = "Should contain min 3 characters"
+        validator.username = false;
+      } else {
+        usernameErrorHandle.innerHTML = "";
+        validator.username = true;
+      }
+      if(passwordHandle.value == ""){
+        passwordErrorHandle.innerHTML = "password can't be blank";
+        validator.password = false;
+      } else if(passwordHandle.value.length < 6){
+        passwordErrorHandle.innerHTML = "Should be min 6 characters";
+        validator.password = false;
+      } else if(!passwordFormatter.test(passwordHandle.value)){
+        passwordErrorHandle.innerHTML = "Ensure you have 1 uppercase, 1 lowercase, & 1 number";
+        validator.password = false;
+      } else{
+        passwordErrorHandle.innerHTML = "";
+        validator.password = true;
+      }
+  
+      if(passwordConfirmationHandle.value == ""){
+        passwordConfirmationErrorHandle.innerHTML = "Can't be blank";
+        validator.password_confirmation = false;
+      } else if(passwordHandle.value != passwordConfirmationHandle.value){
+        passwordConfirmationErrorHandle.innerHTML = "password doesn't match";
+        validator.password_confirmation = false;
+      } else{
+        passwordConfirmationErrorHandle.innerHTML = "";
+        validator.password_confirmation = true;
+      }
+    if(validator.email == false || validator.password == false || validator.password_confirmation == false || validator.username == false){
+      e.preventDefault();
+    }else{
+      return true;
+    }      
+  }, false);
+</script>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+   

@@ -1,6 +1,36 @@
+<div class="row">
+<div class="col-md-8">
+<div class="page-header">
 <h2> Listing amenities</h2>
+</div>
+<ul id="amenityList" >
+<% Amenity.all.each do |amenity| %>
 
-<% @amenities.each do |amenity| %>
-<%= amenity.name %>
-<%= amenity.description %>
+
+	<li><%= amenity.name %></li>
+	<p><%= amenity.description.truncate(30) %></p>
+	<%=link_to amenity, class:"btn btn-info pull-right"  do%>
+	<i class="glyphicon glyphicon-share-alt"></i> Read More
+	<% end %>
+	<hr>
 <% end %>
+</ul>
+
+</div>
+
+<div class="col-md-4">
+<% if can? :create, City.new %>
+<div class="page-header">
+<h2>Add an Amentity</h2>
+</div>
+<%= render 'form' %>
+<% end %>
+<div id="errorMsg"></div>
+</div>
+</div>
+
+
+
+
+
+

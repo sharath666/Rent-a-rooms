@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:username]
          validates_presence_of :username
+         validates_uniqueness_of :username
          validates_presence_of :first_name, :last_name, :mobile
          belongs_to :role
          has_many :rooms
